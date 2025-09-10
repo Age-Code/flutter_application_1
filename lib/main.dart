@@ -86,15 +86,16 @@ class ButtonSection extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final Color color = Colors.black;
-    return SizedBox(
+    return Container(
+      padding: const EdgeInsets.fromLTRB(10.0, 10.0, 10.0, 10.0),
       child: Row(
         mainAxisAlignment: MainAxisAlignment.spaceEvenly,
         children: [
-          ButtonWithText(color: color, icon: Icons.call, label: 'CALL'),
-          ButtonWithText(color: color, icon: Icons.message, label: 'MESSAGE'),
-          ButtonWithText(color: color, icon: Icons.email, label: 'EMAIL'),
-          ButtonWithText(color: color, icon: Icons.share, label: 'SHARE'),
-          ButtonWithText(color: color, icon: Icons.description, label: 'ETC'),
+            ButtonWithText(color: color, icon: Icons.call, label: 'CALL'),
+            ButtonWithText(color: color, icon: Icons.message, label: 'MESSAGE'),
+            ButtonWithText(color: color, icon: Icons.email, label: 'EMAIL'),
+            ButtonWithText(color: color, icon: Icons.share, label: 'SHARE'),
+            ButtonWithText(color: color, icon: Icons.description, label: 'ETC'),
         ],
       ),
     );
@@ -144,8 +145,18 @@ class TextSection extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Padding(
-      padding: const EdgeInsets.all(32),
-      child: Text(description, softWrap: true),
+      padding: const EdgeInsets.all(32.0),
+      child: Row(
+        children: [
+          Icon(Icons.message, size: 40.0),
+          Column(
+            children: [
+              Text('Recent Message'),
+              Text('Recent Message'),
+            ],
+          )
+        ]
+      )
     );
   }
 }
