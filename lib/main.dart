@@ -146,19 +146,57 @@ class TextSection extends StatelessWidget {
   Widget build(BuildContext context) {
     return Padding(
       padding: const EdgeInsets.all(32.0),
-      child: Row(
-        children: [
-          Icon(Icons.message, size: 40.0),
-          Column(
-            children: [
-              Text('Recent Message'),
-              Text('Recent Message'),
-            ],
-          )
-        ]
-      )
+      child: MessageSection(color: Colors.black, icon: Icons.message, label: 'Recent Message',)
     );
   }
+}
+
+
+class MessageSection extends StatelessWidget {
+  const MessageSection({
+    super.key,
+    required this.color,
+    required this.icon,
+    required this.label,
+  });
+
+  final Color color;
+  final IconData icon;
+  final String label;
+
+  @override
+  Widget build(BuildContext context) {
+    return Row(
+      children: [
+        Icon(icon, color: color, size: 40.0,),
+        Container(
+          padding: EdgeInsets.fromLTRB(10.0, 0.0, 10.0, 0.0),
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              Text(
+                label,
+                style: TextStyle(
+                  fontSize: 12,
+                  fontWeight: FontWeight.bold,
+                  color: color,
+                ),
+              ),
+              Text(
+                label,
+                style: TextStyle(
+                  fontSize: 12,
+                  fontWeight: FontWeight.w400,
+                  color: color,
+                ),
+              ),
+            ],
+          ),
+        ),
+      ],
+    );
+  }
+
 }
 
 class ImageSection extends StatelessWidget {
