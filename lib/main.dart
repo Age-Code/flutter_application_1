@@ -7,7 +7,9 @@ class MyApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    const String appTitle = 'Classwork2';
     return MaterialApp(
+      title: appTitle,
       home: Scaffold(
         body: const SingleChildScrollView(
           child: Column(
@@ -27,14 +29,8 @@ class MyApp extends StatelessWidget {
                 color: Colors.black,
               ),
               TextSection(
-                description:
-                    'Lake Oeschinen lies at the foot of the Blüemlisalp in the '
-                    'Bernese Alps. Situated 1,578 meters above sea level, it '
-                    'is one of the larger Alpine Lakes. A gondola ride from '
-                    'Kandersteg, followed by a half-hour walk through pastures '
-                    'and pine forest, leads you to the lake, which warms to 20 '
-                    'degrees Celsius in the summer. Activities enjoyed here '
-                    'include rowing, and riding the summer toboggan run.',
+                recentMessage:
+                    'Long time no see!',
               ),
             ],
           ),
@@ -138,19 +134,18 @@ class ButtonWithText extends StatelessWidget {
 }
 
 class TextSection extends StatelessWidget {
-  const TextSection({super.key, required this.description});
+  const TextSection({super.key, required this.recentMessage});
 
-  final String description;
+  final String recentMessage;
 
   @override
   Widget build(BuildContext context) {
     return Padding(
       padding: const EdgeInsets.all(32.0),
-      child: MessageSection(color: Colors.black, icon: Icons.message, label: 'Recent Message',)
+      child: MessageSection(color: Colors.black, icon: Icons.message, label: 'Recent Message', message: recentMessage,)
     );
   }
 }
-
 
 class MessageSection extends StatelessWidget {
   const MessageSection({
@@ -158,17 +153,20 @@ class MessageSection extends StatelessWidget {
     required this.color,
     required this.icon,
     required this.label,
+    required this.message,
   });
 
   final Color color;
   final IconData icon;
   final String label;
+  final String message;
 
   @override
   Widget build(BuildContext context) {
     return Row(
+      crossAxisAlignment: CrossAxisAlignment.start,
       children: [
-        Icon(icon, color: color, size: 40.0,),
+        Icon(icon, size: 40.0,),
         Container(
           padding: EdgeInsets.fromLTRB(10.0, 0.0, 10.0, 0.0),
           child: Column(
@@ -177,18 +175,11 @@ class MessageSection extends StatelessWidget {
               Text(
                 label,
                 style: TextStyle(
-                  fontSize: 12,
                   fontWeight: FontWeight.bold,
-                  color: color,
                 ),
               ),
               Text(
-                label,
-                style: TextStyle(
-                  fontSize: 12,
-                  fontWeight: FontWeight.w400,
-                  color: color,
-                ),
+                message,
               ),
             ],
           ),
@@ -210,23 +201,18 @@ class ImageSection extends StatelessWidget {
   }
 }
 
-// #docregion favorite-widget
 class FavoriteWidget extends StatefulWidget {
   const FavoriteWidget({super.key});
 
   @override
   State<FavoriteWidget> createState() => _FavoriteWidgetState();
 }
-// #enddocregion favorite-widget
 
-// #docregion favorite-state, favorite-state-fields, favorite-state-build
 class _FavoriteWidgetState extends State<FavoriteWidget> {
-  // #enddocregion favorite-state-build
-  bool _isFavorited = true;
-  int _favoriteCount = 41;
-  // #enddocregion favorite-state-fields
 
-  // #docregion toggle-favorite
+  bool _isFavorited = false;
+  int _favoriteCount = 12;
+
   void _toggleFavorite() {
     setState(() {
       if (_isFavorited) {
@@ -238,9 +224,7 @@ class _FavoriteWidgetState extends State<FavoriteWidget> {
       }
     });
   }
-  // #enddocregion toggle-favorite
 
-  // #docregion favorite-state-build
   @override
   Widget build(BuildContext context) {
     return Row(
@@ -254,7 +238,7 @@ class _FavoriteWidgetState extends State<FavoriteWidget> {
             icon: (_isFavorited
                 ? const Icon(Icons.star)
                 : const Icon(Icons.star_border)),
-            color: Colors.yellow[500],
+            color: Colors.yellow,
             onPressed: _toggleFavorite,
           ),
         ),
@@ -262,8 +246,4 @@ class _FavoriteWidgetState extends State<FavoriteWidget> {
       ],
     );
   }
-
-  // #docregion favorite-state-build
 }
-
-// #enddocregion favorite-state, favorite-state-build
