@@ -16,7 +16,7 @@ class MyApp extends StatelessWidget {
             children: [
               ImageSection(image: 'images/window.jpg'),
               TitleSection(
-                name: 'AhnGwangeun',
+                name: 'Gwangeun Ahn',
                 studentNumber: '22100427',
               ),
               const Divider(
